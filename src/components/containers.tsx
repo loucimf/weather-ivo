@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react"
-import { designSystemStyles } from "./design-system"
+import { designSystemStyles } from "../styles/designSystemStyles"
 
 interface BaseContainerProps {
     children: React.ReactNode
@@ -40,7 +40,7 @@ export const VerticalContainer: React.FC<VerticalContainerProps> = ({
     maxHeight = undefined,
     height = undefined,
     width = "100%",
-    margin = '0 auto',
+    margin = '0',
     gap = designSystemStyles.gapMd,
     backgroundColor = 'transparent',
     alignment = 'start',
@@ -168,3 +168,39 @@ export const HorizontalContainer: React.FC<HorizontalContainerProps> = ({
         </div>
     );
 };
+
+interface CardContainerProps {
+    children: React.ReactNode
+    maxWidth?: string
+    width?: string
+    padding?: string
+    backgroundColor?: string
+    borderRadius?: string
+    boxShadow?: string
+}
+
+export const CardContainer: React.FC<CardContainerProps> = ({ 
+    children, 
+    maxWidth = '100%',
+    width = '100%',
+    padding = designSystemStyles.paddingSm,
+    backgroundColor = designSystemStyles.colorBackgroundWhite,
+    borderRadius = designSystemStyles.cornerRadiusComponent,
+    boxShadow = designSystemStyles.shadowCard
+}) => {
+    return (
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: width,
+            maxWidth: maxWidth,
+            padding: padding,
+            backgroundColor: backgroundColor,
+            borderRadius: borderRadius,
+            boxShadow: boxShadow,
+            fontFamily: designSystemStyles.fontFamily
+        }}>
+            {children}
+        </div>
+    )
+}
