@@ -1,0 +1,21 @@
+.selectable-row-trigger {
+    cursor: pointer;
+    border-radius: 12px;
+    outline: none;
+}
+
+.selectable-row-trigger:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-main-action);
+}
+
+.selectable-row {
+    transition: var(--transition-ease);
+}
+
+.selectable-row:hover {
+    background: var(--color-item-hover-background);
+}
+
+.selectable-row.selected {
+    background: var(--color-main-tinted-action);
+}

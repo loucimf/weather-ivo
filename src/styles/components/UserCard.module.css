@@ -1,0 +1,10 @@
+.name-container {
+    flex: 1;
+    min-width: 0;
+}
+
+.name-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,83 @@
+@import url("./General.module.css");
+
+.main-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-label-container {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    margin-bottom: 15px;
+}
+
+.input-label-container p {
+    color: #667085;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.input-container {
+    display: flex;
+    flex: 1;
+
+    padding: 12px;
+
+    resize: none;
+    outline: none;
+    border: 0;
+    border-radius: var(--radius-button);
+    background: var(--color-text-input-background);
+    color: var(--color-text);
+
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    font-style: normal;
+    /* font-weight: 500; */
+}
+
+.input-container::placeholder {
+    color: var(--color-text-input-placeholder);
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    font-style: normal;
+}
+
+.input-container::-webkit-scrollbar {
+    width: 3px !important; /* Set desired height for horizontal scrollbar */
+}
+
+.input-container::-webkit-scrollbar-track {
+    background: var(--color-green);
+}
+
+.input-container::-webkit-scrollbar-thumb {
+    background: var(--color-green);
+    border-radius: 10px; /* Optional: Add some rounding for aesthetics */
+}
+
+.input-container::-webkit-scrollbar-thumb:hover {
+    background: var(--color-green);
+}
+
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+    color: transparent;
+}
+
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: #F5F5F5; /* FROM Color 1 */
+    }
+    100% {
+        background-color: #E2E2E2; /* TO Color 2 */
+    }
+}

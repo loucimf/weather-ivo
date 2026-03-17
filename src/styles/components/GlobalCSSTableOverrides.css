@@ -1,0 +1,16 @@
+.MuiTableContainer-root::-webkit-scrollbar {
+    width: 3px !important; /* Set desired height for horizontal scrollbar */
+}
+
+.MuiTableContainer-root::-webkit-scrollbar-track {
+    background: #ffffff; /* Track background color */
+}
+
+.MuiTableContainer-root::-webkit-scrollbar-thumb {
+    background: #888888a3; /* Thumb color */
+    border-radius: 10px; /* Optional: Add some rounding for aesthetics */
+}
+
+.MuiTableContainer-root::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Thumb color on hover */
+}

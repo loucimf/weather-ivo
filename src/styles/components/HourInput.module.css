@@ -1,0 +1,86 @@
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.trigger {
+    width: 100%;
+    height: var(--size-button-height);
+    border-radius: var(--corner-radius-component);
+    border: 1px solid var(--color-text-input-border);
+    background: var(--color-background-white);
+    color: var(--color-text);
+    box-shadow: 0 2px 2px 0 rgba(33, 37, 41, 0.06), 0 0 1px 0 rgba(33, 37, 41, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--padding-sm);
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    outline: none;
+}
+
+.trigger:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.trigger:focus-visible {
+    border-color: var(--color-main-action);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-main-action) 28%, transparent);
+}
+
+.value {
+    font-size: var(--font-size-sm);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.3px;
+    font-weight: var(--font-weight-main-action);
+    color: var(--color-title-text);
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(var(--size-button-height) + var(--gap-xxxSm));
+    left: 0;
+    z-index: 20;
+    border-radius: var(--corner-radius-component);
+    border: 1px solid var(--color-text-input-border);
+    background: var(--color-background-white);
+    box-shadow: var(--shadow-card);
+    padding: var(--padding-sm);
+}
+
+.column {
+    width: 56px;
+    max-height: 240px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxxSm);
+}
+
+.option {
+    height: 44px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--font-weight-main-action);
+    cursor: pointer;
+    padding: 2px 8px;
+}
+
+.option:hover {
+    background: var(--color-item-hover-background);
+}
+
+.optionSelected {
+    background: var(--color-main-action);
+    color: #ffffff;
+    /* font-weight: var(--font-weight-title); */
+}

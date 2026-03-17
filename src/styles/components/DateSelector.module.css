@@ -1,0 +1,14 @@
+.date-selector {
+    width: 100%;
+    min-width: 300px;
+}
+
+.calendar-container {
+    width: 100%;
+}
+
+.actions-container {
+    width: 100%;
+    margin-top: var(--space-sm);
+}
+

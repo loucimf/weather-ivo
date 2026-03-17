@@ -1,0 +1,30 @@
+@import url('../variables.css');
+
+.option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-radius: var(--corner-radius-component);
+    background: transparent;
+    transition: var(--transition-duration) var(--transition-ease);
+}
+
+.option:hover {
+    cursor: pointer;
+    background: var(--color-item-hover-background);
+}
+
+.active {
+    background: var(--color-main-tinted-action);
+}
+
+.active:hover {
+    background: var(--color-main-tinted-action);
+}
+
+.label {
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-text);
+    line-height: var(--line-height-normal);
+}

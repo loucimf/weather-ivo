@@ -1,0 +1,265 @@
+@import url('../variables.css');
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    width: var(--size-large-popup-width);
+    height: var(--size-large-popup-height);
+
+    border-radius: var(--corner-radius);
+    background: var(--color-popup-background);
+    padding: var(--padding-popup);
+}
+
+.popup-with-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    width: var(--size-large-popup-width);
+    height: var(--size-large-popup-height);
+
+    border-radius: var(--corner-radius);
+    background: var(--color-popup-background);
+    padding-right: var(--padding-popup-with-text);
+        padding-left: var(--padding-popup-with-text);
+        padding-top: var(--padding-popup-with-text);
+        padding-bottom: var(--padding-popup-with-text);
+    gap: var(--gap-md);
+}
+
+.main-container {
+    display: flex;
+    flex-grow: 1;
+}
+
+.title {
+    width: 100%;
+    text-align: left;
+    color: var(--color-title-text);
+    font-family: var(--font-family);
+    font-size: var(--font-size-title);
+    font-style: normal;
+    font-weight: var(--font-weight-title);
+    line-height: var(--line-height-normal);
+}
+
+.warning-text {
+    color: var(--color-warning-text);
+    font-family: var(--font-family);
+    font-size: var(--font-size-warning);
+    font-style: normal;
+    font-weight: var(--font-weight-warning);
+    line-height: var(--line-height-warning);
+}
+
+.bottom-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 52px;
+    gap: var(--gap-md);
+}
+
+.button {
+    display: flex;
+    width: var(--size-button-width);
+    height: var(--size-button-height);
+    padding: var(--padding-button);
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: var(--radius-button);
+    transition: var(--transition-duration) var(--transition-ease);
+    cursor: pointer;
+}
+
+.button:active {
+    scale: 0.9;
+}
+
+.main-action {
+    color: #FFF;
+    text-align: center;
+    font-family: var(--font-family);
+    font-size: var(--font-size-main-action);
+    font-style: normal;
+    font-weight: var(--font-weight-main-action);
+    line-height: var(--line-height-normal);
+
+    background: var(--color-main-action);
+}
+
+.cancel-action {
+    color: var(--color-cancel-action);
+    text-align: center;
+    font-family: var(--font-family);
+        font-size: var(--font-size-cancel-action);
+    font-style: normal;
+    font-weight: var(--font-weight-cancel-action);
+        line-height: var(--line-height-normal);
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.loading {
+    animation: spin 2s linear infinite;
+    width: var(--size-loading);
+    height: var(--size-loading);
+}
+
+
+/* SVG styles */
+.svg-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+    position: relative;
+}
+  
+.svg-default,
+.svg-clicked {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease;
+}
+  
+/* Initially hide the clicked SVG */
+.svg-clicked {
+    opacity: 0;
+}
+
+
+/* Dropdown styles */
+.dropdown-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    align-self: center;
+
+    height: var(--size-dropdown-height);
+    flex-shrink: 1;
+    border-radius: var(--radius-dropdown);
+    margin-bottom: var(--margin-dropdown-bottom);
+
+    background: var(--color-dropdown-background);
+    transition: var(--transition-duration) var(--transition-ease);
+    z-index: 9999;
+}
+
+.dropdown {
+    /* position: relative; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    padding-left: var(--padding-dropdown-horizontal);
+    padding-right: var(--padding-dropdown-horizontal);
+    cursor: pointer;
+}
+
+.dropdown-option {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: var(--size-dropdown-height);
+
+    padding-left: var(--padding-dropdown-horizontal);
+    padding-right: var(--padding-dropdown-horizontal);
+    cursor: pointer;
+}
+
+.dropdown-option:hover {
+    border-radius: var(--radius-dropdown);
+    background: var(--color-dropdown-hover);
+}
+
+.dropdown-expanded-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow-y: auto;
+    
+    width: 100%;
+    height: var(--size-dropdown-expanded-height);
+    top: 47px;
+    left: 0;
+    z-index: 1;
+    padding-top: var(--padding-dropdown-expanded-vertical);
+    padding-bottom: var(--padding-dropdown-expanded-vertical);
+
+    background: var(--color-dropdown-background);
+    border-bottom-left-radius: var(--radius-dropdown);
+    border-bottom-right-radius: var(--radius-dropdown);
+    transition: var(--transition-duration) var(--transition-ease);
+}
+
+.dropdown-text {
+    color: var(--color-dropdown-text);
+    font-family: var(--font-family);
+    font-size: var(--font-size-dropdown-text);
+    font-style: normal;
+    font-weight: var(--font-weight-dropdown-text);
+    line-height: var(--line-height-normal);
+    user-select: none;
+}
+
+.item-list {
+    height: 80%;
+    width: 80%;
+    margin-left: 35px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+    height: var(--size-item-height);
+    width: 90%;
+    border-radius: var(--radius-item);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: var(--padding-item-left);
+    transition: var(--transition-duration) var(--transition-ease);
+    background: var(--color-item-background);
+    margin-bottom: var(--margin-item-bottom);
+
+    cursor: pointer;
+}
+
+.item-clicked {    
+    cursor: default;
+    background: var(--color-item-clicked-background);
+}
+
+.item:hover:not(.item-clicked) {
+    background: var(--color-item-hover-background);
+}
+
+.item:active:not(.item-clicked) {
+    transform: scale(0.95);
+}

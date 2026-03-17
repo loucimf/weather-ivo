@@ -1,0 +1,28 @@
+@import url('../variables.css');
+
+.wrapper {
+    border-radius: var(--corner-radius-component);
+    transition: var(--transition-duration) var(--transition-ease);
+    outline: none;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    background: var(--color-item-hover-background);
+}
+
+.clickable:active {
+    transform: translateY(1px);
+}
+
+.clickable:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-main-tinted-action);
+}
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
