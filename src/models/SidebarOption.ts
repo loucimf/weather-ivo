@@ -1,9 +1,9 @@
-import type { SystemIconProps } from "@src/design-system/SystemIcon";
-import type { JSX } from "react";
+import type { SystemIcon } from "@src/design-system/SystemIcon";
+import type { ComponentProps, JSX } from "react";
 
 export interface ISidebarOption {
     id: string;
-    icon: SystemIconProps
+    icon: ComponentProps<typeof SystemIcon>["type"]
     label: string;
     content: JSX.Element;
     selected?: boolean; 

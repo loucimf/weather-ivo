@@ -1,50 +1,29 @@
-import { useState } from "react"
-import { CardContainer, HorizontalContainer, VerticalContainer } from "./containers"
+import type { ComponentProps, KeyboardEvent } from "react"
+import { HorizontalContainer, VerticalContainer } from "./containers"
 import { designSystemStyles } from "../styles/designSystemStyles"
 import type { ISidebarOption } from "@src/models/SidebarOption"
-import ClickableWrapper from "./ClickableWrapper"
 import { SystemIcon } from "@src/design-system/SystemIcon"
 import { H1Title } from "@src/design-system/Titles"
+import styles from "@styles/components/LeftMenuOption.module.css"
+import { Text } from "@src/design-system/Texts"
 
 
-export const Sidebar: React.FC = ({ }) => {
-
-    const options: ISidebarOption[] = [
-        {
-            id: "dashboard",
-            icon: {
-                type: "dashboard",
-                color: "black",
-            },
-            label: "Dashboard",
-            content: <p> dashboard </p>
-        },
-        {
-            id: "forecast",
-            icon: {
-                type: "chart2",
-                color: "black",
-            },
-            label: "Forecast",
-            content: <p> forecast </p>
-        },
-        {
-            id: "alerts",
-            icon: {
-                type: "bell",
-                color: "black",
-            },
-            label: "Alerts",
-            content: <p> alerts </p>
-        }
-    ]
-
-    const [currentTab, setCurrentTab] = useState<ISidebarOption>(options[0])
+export const Sidebar: React.FC<{
+    options: ISidebarOption[]
+    currentTab: ISidebarOption
+    setCurrentTab: (opt: ISidebarOption) => void,
+    width?: string
+}> = ({ 
+    options,
+    currentTab,
+    setCurrentTab,
+    width = "20%"
+}) => {
 
     return (
         <VerticalContainer
             height={"100%"}
-            width="20%"
+            width={width}
             backgroundColor={designSystemStyles.colorBackgroundGray2}
             alignment="center"
             padding={designSystemStyles.paddingMd}
@@ -59,9 +38,10 @@ export const Sidebar: React.FC = ({ }) => {
             {options.map((opt) => {
                 return (
                     <SidebarOption
-                        option={opt}
-                        currentTab={currentTab}
-                        setCurrentTab={setCurrentTab}
+                        label={opt.label}
+                        icon={opt.icon}
+                        onClick={() => setCurrentTab(opt)}
+                        isActive={opt.id === currentTab.id}
                     />
                 )
             }
@@ -70,37 +50,61 @@ export const Sidebar: React.FC = ({ }) => {
     )
 }
 
-const SidebarOption: React.FC<{
-    option: ISidebarOption,
-    currentTab: ISidebarOption,
-    setCurrentTab: (opt: ISidebarOption) => void
-}> = ({
-    option,
-    currentTab,
-    setCurrentTab
-}) => {
-        return (
-            <ClickableWrapper
-                onClick={() => { setCurrentTab(option) }}
-            >
-                <CardContainer
-                    padding={designSystemStyles.paddingMd}
-                    backgroundColor={designSystemStyles.colorBackgroundGray3}
-                >
-                    <HorizontalContainer
-                        height={"100%"}
-                        width="15vw"
-                    >
-                        <SystemIcon type={option.icon.type} color={option.icon.color}/>
-                        <div
-                            key={option.id}
-                            className={`${"flap"} ${currentTab.id === option.id ? "" : ''} ${option.selected ? "selected" : ''}`}
-                        >
-                            {option.label}
-                        </div>
 
-                    </HorizontalContainer>
-                </CardContainer>
-            </ClickableWrapper>
-        )
+export interface LeftMenuOptionProps {
+    label: string
+    icon: ComponentProps<typeof SystemIcon>["type"]
+    isActive?: boolean
+    onClick?: () => void
+    className?: string
+}
+
+export const SidebarOption: React.FC<LeftMenuOptionProps> = ({
+    label,
+    icon,
+    isActive = false,
+    onClick,
+    className
+}) => { 
+    const containerClassName = [
+        styles.option,
+        isActive ? styles.active : "",
+        onClick ? styles.clickable : "",
+        "DSLeftMenuOption",
+        className
+    ].filter(Boolean).join(" ")
+    const iconColor = isActive ? designSystemStyles.colorMainAction : designSystemStyles.colorText
+    const labelColor = isActive ? designSystemStyles.colorMainAction : designSystemStyles.colorText
+    const labelClassName = [styles.label].filter(Boolean).join(" ")
+
+    const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+        if (!onClick) return
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault()
+            onClick()
+        }
     }
+
+    return (
+        <div
+            className={containerClassName}
+            onClick={onClick}
+            role={onClick ? "button" : undefined}
+            tabIndex={onClick ? 0 : undefined}
+            onKeyDown={handleKeyDown}
+        >
+            <HorizontalContainer
+                gap={designSystemStyles.gapMd}
+                alignment="center"
+                height={designSystemStyles.sizeButtonHeight}
+                paddingLeft={designSystemStyles.paddingLg}
+                paddingRight={designSystemStyles.paddingLg}
+                paddingTop={designSystemStyles.paddingMd}
+                paddingBottom={designSystemStyles.paddingMd}
+            >
+                <SystemIcon type={icon} color={iconColor} className="DSLeftMenuOptionIcon" />
+                <Text text={label} color={labelColor} className={labelClassName} />
+            </HorizontalContainer>
+        </div>
+    )
+}

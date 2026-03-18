@@ -173,10 +173,12 @@ interface CardContainerProps {
     children: React.ReactNode
     maxWidth?: string
     width?: string
+    height?: string
     padding?: string
     backgroundColor?: string
     borderRadius?: string
     boxShadow?: string
+    gap?: string
 }
 
 export const CardContainer: React.FC<CardContainerProps> = ({ 
@@ -186,15 +188,19 @@ export const CardContainer: React.FC<CardContainerProps> = ({
     padding = designSystemStyles.paddingSm,
     backgroundColor = designSystemStyles.colorBackgroundWhite,
     borderRadius = designSystemStyles.cornerRadiusComponent,
-    boxShadow = designSystemStyles.shadowCard
+    boxShadow = designSystemStyles.shadowCard,
+    height = 'auto',
+    gap = "",
 }) => {
     return (
         <div style={{
             display: 'flex',
             flexDirection: 'column',
             width: width,
+            height: height,
             maxWidth: maxWidth,
             padding: padding,
+            gap: gap,
             backgroundColor: backgroundColor,
             borderRadius: borderRadius,
             boxShadow: boxShadow,
