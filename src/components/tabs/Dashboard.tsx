@@ -5,8 +5,18 @@ import { SmallText, Text } from "@src/design-system/Texts"
 import { SystemIcon } from "@src/design-system/SystemIcon"
 import { designSystemStyles } from "@src/styles/designSystemStyles"
 import ClickableWrapper from "../ClickableWrapper"
-import type { ComponentProps } from "react"
+import { useState, type ComponentProps } from "react"
 
+interface OverviewCompProps {
+    temp: number,
+    city: string,
+    date: string,
+    wind: string,
+    humidity: string,
+    visibility: string,
+    pressure: string,
+    weatherState: string,
+}
 
 export const Dashboard: React.FC = ({
 
@@ -14,10 +24,11 @@ export const Dashboard: React.FC = ({
     return (
         <VerticalContainer
             width="100%"
+            height={"100%"}
             padding="0"
             alignment="center"
         >
-            <Header height="5%" width="95%" />
+            <Header height="10%" width="95%" />
             <div style={{ height: "1px", width: "100%", backgroundColor: "black" }} />
             <VerticalContainer
                 height={"50%"}
@@ -26,16 +37,25 @@ export const Dashboard: React.FC = ({
                 <HorizontalContainer
                     width="100%"
                     height={"100%"}
-                    justifyContent="start"
+                    justifyContent="flex-start"
                 >
-                    <OverviewComp />
+                    <OverviewComp
+                        wind="12km/h"
+                        pressure="1012pHa"
+                        visibility="10km"
+                        humidity="25%"
+                        temp={24}
+                        city="New York"
+                        weatherState="Partly Cloudy"
+                        date="Oct 17   •   9:41 AM"
+                    />
                     <VerticalContainer
                         width="35%"
                         height="100%"
-                        justifyContent="start"
-                        alignment="start"
-                        margin=""
-                        padding=""
+                        justifyContent="flex-start"
+                        alignment="flex-start"
+                        margin="0"
+                        padding="0"
                     >
                         <AirQualityComp/>
                         <SunAndMoonComp/>
@@ -50,6 +70,7 @@ const AirQualityComp: React.FC = () => {
     return (
         <CardContainer
             padding={designSystemStyles.paddingLg}
+            height="50%"
         >
             <HorizontalContainer>
                 <IconText text="Air Quality Index" bold={true}/>
@@ -81,7 +102,9 @@ const AirQualityComp: React.FC = () => {
 
 const SunAndMoonComp: React.FC = () => {
     return (
-        <CardContainer>
+        <CardContainer
+            height="50%"
+        >
             <HorizontalContainer>
                 <p></p>
             </HorizontalContainer>
@@ -89,10 +112,22 @@ const SunAndMoonComp: React.FC = () => {
     )
 }
 
-const OverviewComp: React.FC = () => {
+const OverviewComp: React.FC<OverviewCompProps> = ({
+    city,
+    pressure,
+    wind,
+    humidity,
+    date,
+    visibility,
+    weatherState,
+    temp
+}) => {
+    const [useCelsius, setUseCelsius] = useState<boolean>(true)
+
     return (
         <CardContainer
             width="65%"
+            height="100%"
             padding={designSystemStyles.paddingLg}
         >
             <VerticalContainer
@@ -114,20 +149,22 @@ const OverviewComp: React.FC = () => {
                             margin={0}
                         >
                             <SystemIcon type="calendar" color="black" />
-                            <Text markdown={true} text="**New york**" />
+                            <Text markdown={true} text={`**${city}**`} />
                         </HorizontalContainer>
-                        <SmallText text="Today, Oct 17   •   9:41 AM" />
+                        <SmallText text={`Today, ${date}`} />
                     </VerticalContainer>
 
 
-                    <ClickableWrapper onClick={() => { }}>
+                    <ClickableWrapper onClick={() => { 
+                        setUseCelsius(!useCelsius)
+                    }}>
                         <CardContainer>
                             <HorizontalContainer
                                 height={"10px"}
                             >
-                                <Text markdown={true} text="**°C**" />
+                                <Text markdown={true} text={useCelsius ? "**°C**" : "°C"} />
                                 <div style={{ height: "100%", width: "1px", backgroundColor: "black" }} />
-                                <Text text="°F" />
+                                <Text markdown={true} text={!useCelsius ? "**°F**" : "°F"} />
                             </HorizontalContainer>
                         </CardContainer>
                     </ClickableWrapper>
@@ -147,8 +184,8 @@ const OverviewComp: React.FC = () => {
                             margin={0}
                             width="25%"
                         >
-                            <h1 style={{ margin: "0" }}>24°</h1>
-                            <Text text="Partly Cloudy" />
+                            <h1 style={{ margin: "0" }}>{ useCelsius ? `${temp}°` : `${convertToFahrenheit(temp)}°`}</h1>
+                            <Text text={weatherState} />
                         </VerticalContainer>
                     </HorizontalContainer>
                     <HorizontalContainer
@@ -162,12 +199,12 @@ const OverviewComp: React.FC = () => {
                                 gap={designSystemStyles.gapSm}
                             >
                                 <HorizontalContainer>
-                                    <DataPoint text="Wind" value="12km/h"/>
-                                    <DataPoint text="Humidity" value="45%"/>      
+                                    <DataPoint text="Wind" value={wind}/>
+                                    <DataPoint text="Humidity" value={humidity}/>      
                                 </HorizontalContainer>
                                 <HorizontalContainer>
-                                    <DataPoint text="Visibility" value="10km" icon="eye"/>
-                                    <DataPoint text="Pressure" value="1024hPa"/>      
+                                    <DataPoint text="Visibility" value={visibility} icon="eye"/>
+                                    <DataPoint text="Pressure" value={pressure}/>      
                                 </HorizontalContainer>
                             </VerticalContainer>
 
@@ -242,3 +279,9 @@ const DataPoint: React.FC<{
         </VerticalContainer>
     )
 }
+
+
+function convertToFahrenheit(temp:number) {
+    const converted = (temp / (9/5)) + 32
+    return Math.round(converted)
+} 

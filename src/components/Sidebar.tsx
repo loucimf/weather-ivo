@@ -5,7 +5,7 @@ import type { ISidebarOption } from "@src/models/SidebarOption"
 import { SystemIcon } from "@src/design-system/SystemIcon"
 import { H1Title } from "@src/design-system/Titles"
 import styles from "@styles/components/LeftMenuOption.module.css"
-import { Text } from "@src/design-system/Texts"
+import { SmallText, Text } from "@src/design-system/Texts"
 
 
 export const Sidebar: React.FC<{
@@ -25,7 +25,7 @@ export const Sidebar: React.FC<{
             height={"100%"}
             width={width}
             backgroundColor={designSystemStyles.colorBackgroundGray2}
-            alignment="center"
+            alignment="start"
             padding={designSystemStyles.paddingMd}
         >
             <HorizontalContainer
@@ -35,6 +35,7 @@ export const Sidebar: React.FC<{
                 <H1Title text="WeatherApp"/>
             </HorizontalContainer>
 
+            <SmallText markdown={true} text="**MAIN MENU**"/>
             {options.map((opt) => {
                 return (
                     <SidebarOption
