@@ -1,15 +1,25 @@
 import { fetchWeatherApi } from "openmeteo";
 
-const params = {
+const newYorkparams = {
 	latitude: 52.52,
 	longitude: 13.41,
 	daily: ["sunrise", "sunset", "uv_index_max", "temperature_2m_max", "temperature_2m_min"],
 	hourly: ["temperature_2m", "apparent_temperature", "precipitation_probability", "wind_speed_10m", "visibility", "surface_pressure", "cloud_cover", "uv_index", "sunshine_duration"],
 	current: ["temperature_2m", "cloud_cover", "wind_speed_10m", "surface_pressure", "precipitation", "showers", "rain", "apparent_temperature", "relative_humidity_2m"],
 	timezone: "America/New_York",
+}; //Europe/London
+
+const autoParams = {
+	latitude: -34.5204617692487,
+	longitude: -58.475328194492775,
+	daily: ["sunrise", "sunset", "uv_index_max", "temperature_2m_max", "temperature_2m_min"],
+	hourly: ["temperature_2m", "apparent_temperature", "precipitation_probability", "wind_speed_10m", "visibility", "surface_pressure", "cloud_cover", "uv_index", "sunshine_duration"],
+	current: ["temperature_2m", "cloud_cover", "wind_speed_10m", "surface_pressure", "precipitation", "showers", "rain", "apparent_temperature", "relative_humidity_2m"],
+	timezone: "auto",
 };
+
 const url = "https://api.open-meteo.com/v1/forecast";
-const responses = await fetchWeatherApi(url, params);
+const responses = await fetchWeatherApi(url, autoParams);
 
 // Process first location. Add a for-loop for multiple locations or weather models
 const response = responses[0];
@@ -38,7 +48,7 @@ const sunrise = daily.variables(0)!;
 const sunset = daily.variables(1)!;
 
 // Note: The order of weather variables in the URL query and the indices below need to match!
-const weatherData = {
+export const weatherData = {
 	current: {
 		time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
 		temperature_2m: current.variables(0)!.value(),

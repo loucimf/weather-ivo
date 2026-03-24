@@ -3,16 +3,47 @@ import './App.css'
 import { HorizontalContainer } from './components/containers'
 import { Sidebar } from './components/Sidebar'
 import type { ISidebarOption } from './models/SidebarOption'
-import { Dashboard } from './components/tabs/Dashboard'
+import { Dashboard } from './components/tabs/views/Dashboard'
+import { useDashboardViewModel } from './components/tabs/ViewModels/DashboardViewModel'
 
 function App() {
+	
+	const {
+		wind,
+		pressure,
+		visibility,
+		humidity,
+		temp,
+		minTemp,
+		maxTemp,
+		airIndex,
+		sunrise,
+		sunset,
+		city,
+		weatherState,
+		date,
+	} = useDashboardViewModel()
 	
 	const options: ISidebarOption[] = [
 		{
 			id: "dashboard",
 			icon: "dashboard",
 			label: "Dashboard",
-			content: <Dashboard/>
+			content: <Dashboard
+				minTemp={minTemp}
+				maxTemp={maxTemp}
+				weatherState={weatherState}
+				date={date}
+				city={city}
+				wind={wind}
+				pressure={pressure}
+				visibility={visibility}
+				humidity={humidity}
+				temp={temp}
+				airIndex={airIndex}
+				sunrise={sunrise}
+				sunset={sunset}
+			/>
 		},
 		{
 			id: "forecast",

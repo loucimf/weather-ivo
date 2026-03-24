@@ -1,9 +1,15 @@
 import type React from "react"
-import { HorizontalContainer, VerticalContainer } from "../containers"
-import { AirQualityComp, Header, OverviewComp, SunAndMoonComp } from "./components/DashComps"
-
-export const Dashboard: React.FC = ({
-
+import { HorizontalContainer, VerticalContainer } from "../../containers"
+import { AirQualityComp, Header, OverviewComp, SunAndMoonComp, type DashboardProps } from "../components/DashComps"
+export const Dashboard: React.FC<DashboardProps> = ({
+    wind,
+    pressure,
+    visibility,
+    humidity,
+    temp,
+    airIndex,
+    sunrise,
+    sunset,
 }) => {
     return (
         <VerticalContainer
@@ -24,11 +30,11 @@ export const Dashboard: React.FC = ({
                     justifyContent="flex-start"
                 >
                     <OverviewComp
-                        wind="12km/h"
-                        pressure="1012pHa"
-                        visibility="10km"
-                        humidity="25%"
-                        temp={24}
+                        wind={wind}
+                        pressure={pressure}
+                        visibility={visibility}
+                        humidity={humidity}
+                        temp={temp}
                         city="New York"
                         weatherState="Partly Cloudy"
                         date="Oct 17   •   9:41 AM"
@@ -41,8 +47,8 @@ export const Dashboard: React.FC = ({
                         margin="0"
                         padding="0"
                     >
-                        <AirQualityComp/>
-                        <SunAndMoonComp/>
+                        <AirQualityComp airIndex={airIndex}/>
+                        <SunAndMoonComp sunrise={sunrise} sunset={sunset}/>
                     </VerticalContainer>
                 </HorizontalContainer>
             </VerticalContainer>

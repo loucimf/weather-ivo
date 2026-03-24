@@ -6,7 +6,13 @@ import { H1Title, H2Title } from "@src/design-system/Titles"
 import { designSystemStyles } from "@src/styles/designSystemStyles"
 import { useState, type ComponentProps } from "react"
 
-const AirQualityComp: React.FC = () => {
+interface AirQualityProps {
+    airIndex: string
+}
+
+const AirQualityComp: React.FC<AirQualityProps> = ({
+    airIndex = "67"
+}) => {
     return (
         <CardContainer
             padding={designSystemStyles.paddingLg}
@@ -16,7 +22,7 @@ const AirQualityComp: React.FC = () => {
                 <IconText text="Air Quality Index" bold={true}/>
             </HorizontalContainer>
             <HorizontalContainer>
-                <H1Title text="41"/>
+                <H1Title text={airIndex}/>
                 <CardContainer
                     width="50px"
                     height="auto"
@@ -40,7 +46,15 @@ const AirQualityComp: React.FC = () => {
     )
 }
 
-const SunAndMoonComp: React.FC = () => {
+interface SunAndMoonProps {
+    sunrise: string
+    sunset: string
+}
+
+const SunAndMoonComp: React.FC<SunAndMoonProps> = ({
+    sunrise = "00:00",
+    sunset = "00:00"
+}) => {
     return (
         <CardContainer
             height="50%"
@@ -60,12 +74,12 @@ const SunAndMoonComp: React.FC = () => {
                     justifyContent="space-between"
                 >
                     <TimeComp
-                        hour="5:45 AM"
+                        hour={sunrise}
                         text="Sunrise"
                     />
                     <SystemIcon type="edit" color="black"/>
                     <TimeComp
-                        hour="9:25 PM"
+                        hour={sunset}
                         text="Sunset"
                     />
                 </HorizontalContainer>
@@ -282,4 +296,8 @@ function convertToFahrenheit(temp:number) {
 } 
 
 
+export interface DashboardProps extends AirQualityProps, SunAndMoonProps, OverviewCompProps {
+    minTemp: number | null
+    maxTemp: number | null
+}
 export { Header, OverviewComp, AirQualityComp, SunAndMoonComp }
