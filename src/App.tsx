@@ -22,6 +22,8 @@ function App() {
 		city,
 		weatherState,
 		date,
+		latitude,
+		longitude,
 	} = useDashboardViewModel()
 	
 	const options: ISidebarOption[] = [
@@ -30,6 +32,8 @@ function App() {
 			icon: "dashboard",
 			label: "Dashboard",
 			content: <Dashboard
+				latitude={latitude}
+				longitude={longitude}
 				minTemp={minTemp}
 				maxTemp={maxTemp}
 				weatherState={weatherState}

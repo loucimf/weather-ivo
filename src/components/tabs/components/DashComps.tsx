@@ -4,7 +4,8 @@ import { SystemIcon } from "@src/design-system/SystemIcon"
 import { SmallText, Text } from "@src/design-system/Texts"
 import { H1Title, H2Title } from "@src/design-system/Titles"
 import { designSystemStyles } from "@src/styles/designSystemStyles"
-import { useState, type ComponentProps } from "react"
+import React, { useState, type ComponentProps } from "react"
+import { TemperatureTrendChart, type TemperatureChartProps } from "./TrendingHoursComp"
 
 interface AirQualityProps {
     uvIndex: string
@@ -56,10 +57,10 @@ const QualityComp: React.FC<AirQualityProps> = ({
             height="50%"
         >
             <HorizontalContainer>
-                <IconText icon="leaf" text="UV Index" bold={true}/>
+                <IconText icon="leaf" text="UV Index" bold={true} />
             </HorizontalContainer>
             <HorizontalContainer>
-                <H1Title text={uvIndex}/>
+                <H1Title text={uvIndex} />
                 <CardContainer
                     width="6w"
                     height="auto"
@@ -72,14 +73,14 @@ const QualityComp: React.FC<AirQualityProps> = ({
                         justifyContent="center"
                         alignment="center"
                     >
-                        <SmallText color={designSystemStyles.colorBackgroundWhite} markdown={true} text={`**${uvStyle.label}**`}/>
+                        <SmallText color={designSystemStyles.colorBackgroundWhite} markdown={true} text={`**${uvStyle.label}**`} />
                     </HorizontalContainer>
                 </CardContainer>
             </HorizontalContainer>
-            <div style={{ height: "1vh", width: "100%", backgroundColor: designSystemStyles.colorBackgroundGray3, borderRadius: designSystemStyles.radiusItem, marginBottom: "10px"}}>
-                <div style={{ height: "100%", width: `${uvPercent}%`, position: "relative", left: "0", top: "0", background: `linear-gradient(90deg, ${designSystemStyles.colorGreen} 0%, ${designSystemStyles.colorPresenteeismYellow} 50%, ${designSystemStyles.colorRed} 100%)`, backgroundSize: gradientScale, backgroundPosition: "left center", backgroundRepeat: "no-repeat", borderRadius: designSystemStyles.radiusItem}}/>
+            <div style={{ height: "1vh", width: "100%", backgroundColor: designSystemStyles.colorBackgroundGray3, borderRadius: designSystemStyles.radiusItem, marginBottom: "10px" }}>
+                <div style={{ height: "100%", width: `${uvPercent}%`, position: "relative", left: "0", top: "0", background: `linear-gradient(90deg, ${designSystemStyles.colorGreen} 0%, ${designSystemStyles.colorPresenteeismYellow} 50%, ${designSystemStyles.colorRed} 100%)`, backgroundSize: gradientScale, backgroundPosition: "left center", backgroundRepeat: "no-repeat", borderRadius: designSystemStyles.radiusItem }} />
             </div>
-            <SmallText markdown={true} text={`**${uvStyle.advice}**`}/>
+            <SmallText markdown={true} text={`**${uvStyle.advice}**`} />
         </CardContainer>
     )
 }
@@ -117,7 +118,7 @@ const SunAndMoonComp: React.FC<SunAndMoonProps> = ({
                         hour={sunrise}
                         text="Sunrise"
                     />
-                    <SystemIcon type="cycle" color={iconColor}/>
+                    <SystemIcon type="cycle" color={iconColor} />
                     <TimeComp
                         icon="arrow-down"
                         hour={sunset}
@@ -138,20 +139,20 @@ const TimeComp: React.FC<{
     hour,
     icon
 }) => {
-    const iconColor = designSystemStyles.colorText
-    return (
-        <VerticalContainer
-            width="fit-content"
-            alignment="center"
-            gap="0"
-            padding="0"
-        >
-            <SystemIcon type={icon} color={iconColor}/>
-            <Text markdown={true} text={`**${hour}**`}/>
-            <SmallText text={text}/>
-        </VerticalContainer>
-    )
-}
+        const iconColor = designSystemStyles.colorText
+        return (
+            <VerticalContainer
+                width="fit-content"
+                alignment="center"
+                gap="0"
+                padding="0"
+            >
+                <SystemIcon type={icon} color={iconColor} />
+                <Text markdown={true} text={`**${hour}**`} />
+                <SmallText text={text} />
+            </VerticalContainer>
+        )
+    }
 
 interface OverviewCompProps {
     temp: number,
@@ -211,7 +212,7 @@ const OverviewComp: React.FC<OverviewCompProps> = ({
                     </VerticalContainer>
 
 
-                    <ClickableWrapper onClick={() => { 
+                    <ClickableWrapper onClick={() => {
                         setUseCelsius(!useCelsius)
                     }}>
                         <CardContainer>
@@ -247,7 +248,7 @@ const OverviewComp: React.FC<OverviewCompProps> = ({
                             margin={0}
                             width="25%"
                         >
-                            <h1 style={{ margin: "0" }}>{ useCelsius ? `${temp}°` : `${convertToFahrenheit(temp)}°`}</h1>
+                            <h1 style={{ margin: "0" }}>{useCelsius ? `${temp}°` : `${convertToFahrenheit(temp)}°`}</h1>
                             <Text text={weatherState} />
                         </VerticalContainer>
                     </HorizontalContainer>
@@ -265,12 +266,12 @@ const OverviewComp: React.FC<OverviewCompProps> = ({
                                 gap={designSystemStyles.gapSm}
                             >
                                 <HorizontalContainer>
-                                    <DataPoint icon="wind" text="Wind" value={wind}/>
-                                    <DataPoint icon="water" text="Humidity" value={humidity}/>      
+                                    <DataPoint icon="wind" text="Wind" value={wind} />
+                                    <DataPoint icon="water" text="Humidity" value={humidity} />
                                 </HorizontalContainer>
                                 <HorizontalContainer>
-                                    <DataPoint text="Visibility" value={visibility} icon="eye"/>
-                                    <DataPoint icon="temperature" text="Pressure" value={pressure}/>      
+                                    <DataPoint text="Visibility" value={visibility} icon="eye" />
+                                    <DataPoint icon="temperature" text="Pressure" value={pressure} />
                                 </HorizontalContainer>
                             </VerticalContainer>
 
@@ -289,18 +290,18 @@ const Header: React.FC<{
     height,
     width
 }) => {
-    return (
-        <VerticalContainer
-            height={height}
-            width={width}
-            gap="0"
-            margin={"0"}
-        >
-            <H2Title text="Good morning, Ivo" />
-            <Text text="Here is your weather overview for today" />
-        </VerticalContainer>
-    )
-}
+        return (
+            <VerticalContainer
+                height={height}
+                width={width}
+                gap="0"
+                margin={"0"}
+            >
+                <H2Title text="Good morning, Ivo" />
+                <Text text="Here is your weather overview for today" />
+            </VerticalContainer>
+        )
+    }
 
 
 const IconText: React.FC<{
@@ -312,51 +313,82 @@ const IconText: React.FC<{
     bold = false,
     icon = "edit"
 }) => {
-    const iconColor = designSystemStyles.colorText
-    return (
-        <HorizontalContainer>
-            <SystemIcon type={icon} color={iconColor}/>
-            <Text markdown={bold ? true : false} text={bold ? `**${text}**` : text}/>
-        </HorizontalContainer>
-    )
-}
+        const iconColor = designSystemStyles.colorText
+        return (
+            <HorizontalContainer>
+                <SystemIcon type={icon} color={iconColor} />
+                <Text markdown={bold ? true : false} text={bold ? `**${text}**` : text} />
+            </HorizontalContainer>
+        )
+    }
 
 
 const DataPoint: React.FC<{
     text: string,
     value: string,
     icon?: ComponentProps<typeof SystemIcon>["type"]
-}> = ({ 
+}> = ({
     text = "data",
     value = "n/a",
     icon = "edit"
 }) => {
-    const iconColor = designSystemStyles.colorText
-    return (
-        <VerticalContainer
-            gap="0"
-        >
-            <HorizontalContainer
-                gap={designSystemStyles.gapSm}
-                margin={0}
+        const iconColor = designSystemStyles.colorText
+        return (
+            <VerticalContainer
+                gap="0"
             >
-                <SystemIcon type={icon} color={iconColor} />
-                <SmallText text={text} />
-            </HorizontalContainer>
-            <Text markdown={true} text={`**${value}**`} />
-        </VerticalContainer>
+                <HorizontalContainer
+                    gap={designSystemStyles.gapSm}
+                    margin={0}
+                >
+                    <SystemIcon type={icon} color={iconColor} />
+                    <SmallText text={text} />
+                </HorizontalContainer>
+                <Text markdown={true} text={`**${value}**`} />
+            </VerticalContainer>
+        )
+    }
+
+export const TempHourComp: React.FC<TemperatureChartProps> = ({
+    latitude,
+    longitude
+}) => {
+    return (
+        <CardContainer
+            width="65%"
+        >
+            <TemperatureTrendChart
+                latitude={latitude}
+                longitude={longitude}
+                fill={"rgba(255, 154, 0, 0.18)"}
+                stroke={designSystemStyles.colorOrange}
+            />
+        </CardContainer>
     )
 }
 
 
-function convertToFahrenheit(temp:number) {
-    const converted = (temp * (9/5)) + 32
+export const TempSenseComp: React.FC = () => {
+    return (
+        <CardContainer width="35%" height="100%">
+            <VerticalContainer height={"100%"} padding={designSystemStyles.paddingLg}>
+                <IconText text="Feels Like" bold={true}/>
+            
+            </VerticalContainer>
+        </CardContainer>
+    )
+}
+
+
+function convertToFahrenheit(temp: number) {
+    const converted = (temp * (9 / 5)) + 32
     return Math.round(converted)
-} 
+}
 
 
-export interface DashboardProps extends AirQualityProps, SunAndMoonProps, OverviewCompProps {
+export interface DashboardProps extends AirQualityProps, SunAndMoonProps, OverviewCompProps, TemperatureChartProps {
     minTemp: number | null
     maxTemp: number | null
 }
 export { Header, OverviewComp, QualityComp, SunAndMoonComp }
+

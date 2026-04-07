@@ -1,6 +1,6 @@
 import type React from "react"
 import { HorizontalContainer, VerticalContainer } from "../../containers"
-import { QualityComp, Header, OverviewComp, SunAndMoonComp, type DashboardProps } from "../components/DashComps"
+import { QualityComp, Header, OverviewComp, SunAndMoonComp, type DashboardProps, TempHourComp, TempSenseComp } from "../components/DashComps"
 import { designSystemStyles } from "@src/styles/designSystemStyles"
 export const Dashboard: React.FC<DashboardProps> = ({
     wind,
@@ -11,6 +11,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
     uvIndex: airIndex,
     sunrise,
     sunset,
+    longitude,
+    latitude
 }) => {
 
     const now = new Date();
@@ -60,6 +62,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         <QualityComp uvIndex={airIndex}/>
                         <SunAndMoonComp sunrise={sunrise} sunset={sunset}/>
                     </VerticalContainer>
+                </HorizontalContainer>
+                <HorizontalContainer>
+                    <TempHourComp longitude={longitude} latitude={latitude}/>
+                    <TempSenseComp/>
                 </HorizontalContainer>
             </VerticalContainer>
         </VerticalContainer>

@@ -25,12 +25,13 @@ export function useDashboardViewModel(): DashboardProps {
         pressure: `${Math.round(current.surface_pressure)} hPa`,
         visibility: `${hourlyVisibility} m`,
 
-        // OverviewCompProps expects these but Dashboard may override
         city: "New York",
         date: new Date().toLocaleDateString([], { month: "short", day: "numeric" }),
         weatherState: "Partly Cloudy",
         maxTemp: daily.temperature_2m_max?.[0] ?? null,
         minTemp: daily.temperature_2m_min?.[0] ?? null,
-        // SunAndMoonProps and AirQualityProps are covered above
+
+        latitude: weatherData.latitude,
+        longitude: weatherData.longitude,
     }
 }

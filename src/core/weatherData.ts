@@ -49,6 +49,8 @@ const sunset = daily.variables(1)!;
 
 // Note: The order of weather variables in the URL query and the indices below need to match!
 export const weatherData = {
+	latitude: newYorkparams.latitude,
+	longitude: newYorkparams.longitude,
 	current: {
 		time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
 		temperature_2m: current.variables(0)!.value(),
