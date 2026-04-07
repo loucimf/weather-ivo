@@ -1,4 +1,5 @@
 import { designSystemStyles } from "@styles/designSystemStyles"
+import type { CSSProperties } from "react";
 import { ReactComponent as BellIcon } from "@assets/SVGs/DesignSystem/bell.svg";
 import { ReactComponent as BankIcon } from "@assets/SVGs/DesignSystem/bank.svg";
 import { ReactComponent as BuildingIcon } from "@assets/SVGs/DesignSystem/building.svg";
@@ -33,6 +34,16 @@ import { ReactComponent as SettingsIcon } from "@assets/SVGs/DesignSystem/settin
 import { ReactComponent as TicketIcon } from "@assets/SVGs/DesignSystem/ticket.svg";
 import { ReactComponent as WallIcon } from "@assets/SVGs/DesignSystem/wall.svg";
 import { ReactComponent as BoxIcon } from "@assets/SVGs/DesignSystem/box.svg";
+import { ReactComponent as WeatherIcon } from "@assets/SVGs/DesignSystem/weather.svg";
+import { ReactComponent as SunIcon } from "@assets/SVGs/DesignSystem/sun.svg";
+import { ReactComponent as SunCloudIcon } from "@assets/SVGs/DesignSystem/sun-cloud.svg";
+import { ReactComponent as LeafIcon } from "@assets/SVGs/DesignSystem/leaf.svg";
+import { ReactComponent as WaterIcon } from "@assets/SVGs/DesignSystem/water.svg";
+import { ReactComponent as TemperatureIcon } from "@assets/SVGs/DesignSystem/temperature.svg";
+import { ReactComponent as WindIcon } from "@assets/SVGs/DesignSystem/wind.svg";
+import { ReactComponent as ArrowUpIcon } from "@assets/SVGs/DesignSystem/arrow-up.svg";
+import { ReactComponent as ArrowDownIcon } from "@assets/SVGs/DesignSystem/arrow-down.svg";
+import { ReactComponent as CycleIcon } from "@assets/SVGs/DesignSystem/cycle.svg";
 
 export interface SystemIconProps {
     color: string
@@ -71,13 +82,55 @@ export interface SystemIconProps {
         | 'ticket'
         | 'wall'
         | 'box'
+        | 'weather'
+        | 'leaf'
+        | 'sun'
+        | 'water'
+        | 'wind'
+        | 'temperature'
+        | 'sun-cloud'
+        | 'arrow-up'
+        | 'arrow-down'
+        | 'cycle'
     className?: string
+    size?: "small" | "medium" | "large" | "extra-large" | "extra-extra-large"
+    glow?: boolean
+    glowColor?: string
 }
-export const SystemIcon: React.FC<SystemIconProps> = (props) => {
-    const iconStyle = {
-        width: '24px',
-        height: '24px',
-        color: props.color ?? designSystemStyles.colorText
+export const SystemIcon: React.FC<SystemIconProps> = ({
+    size = "medium",
+    ...props
+}) => {
+
+    let resolvedSize: string;
+    switch (size) {
+        case "small":
+            resolvedSize = "12px"
+            break;
+        case "medium":
+            resolvedSize = "24px"
+            break;
+        case "large":
+            resolvedSize = "70px"
+            break;
+        case "extra-large":
+            resolvedSize = "130px"
+            break;
+        case "extra-extra-large":
+            resolvedSize = "160px"
+            break;
+        default: 
+            resolvedSize = "24px"
+    }
+
+    const glowColor = props.glowColor ?? props.color ?? designSystemStyles.colorText
+    const iconStyle: CSSProperties = {
+        width: resolvedSize,
+        height: resolvedSize,
+        color: props.color ?? designSystemStyles.colorText,
+        filter: props.glow
+            ? `drop-shadow(0 0 6px ${glowColor}) drop-shadow(0 0 18px ${glowColor})`
+            : undefined
     };
     const iconClassName = ['DSSystemIcon', props.className].filter(Boolean).join(' ');
 
@@ -150,5 +203,25 @@ export const SystemIcon: React.FC<SystemIconProps> = (props) => {
             return <WallIcon style={iconStyle} className={iconClassName} />;
         case "box":
             return <BoxIcon style={iconStyle} className={iconClassName} />;
+        case "weather":
+            return <WeatherIcon style={iconStyle} className={iconClassName} />
+        case 'leaf':
+            return <LeafIcon style={iconStyle} className={iconClassName} />
+        case 'sun':
+            return <SunIcon style={iconStyle} className={iconClassName} />
+        case 'sun-cloud':
+            return <SunCloudIcon style={iconStyle} className={iconClassName} />
+        case 'water':
+            return <WaterIcon style={iconStyle} className={iconClassName} />
+        case 'wind':
+            return <WindIcon style={iconStyle} className={iconClassName} />
+        case 'temperature':
+            return <TemperatureIcon style={iconStyle} className={iconClassName} />
+        case 'arrow-down':
+            return <ArrowDownIcon style={iconStyle} className={iconClassName}/>
+        case 'arrow-up':
+            return <ArrowUpIcon style={iconStyle} className={iconClassName}/>
+        case 'cycle':
+            return <CycleIcon style={iconStyle} className={iconClassName}/>
     }
 }

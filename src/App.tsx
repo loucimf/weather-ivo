@@ -16,7 +16,7 @@ function App() {
 		temp,
 		minTemp,
 		maxTemp,
-		airIndex,
+		uvIndex: airIndex,
 		sunrise,
 		sunset,
 		city,
@@ -40,7 +40,7 @@ function App() {
 				visibility={visibility}
 				humidity={humidity}
 				temp={temp}
-				airIndex={airIndex}
+				uvIndex={airIndex}
 				sunrise={sunrise}
 				sunset={sunset}
 			/>

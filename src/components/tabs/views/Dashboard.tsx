@@ -1,16 +1,26 @@
 import type React from "react"
 import { HorizontalContainer, VerticalContainer } from "../../containers"
-import { AirQualityComp, Header, OverviewComp, SunAndMoonComp, type DashboardProps } from "../components/DashComps"
+import { QualityComp, Header, OverviewComp, SunAndMoonComp, type DashboardProps } from "../components/DashComps"
+import { designSystemStyles } from "@src/styles/designSystemStyles"
 export const Dashboard: React.FC<DashboardProps> = ({
     wind,
     pressure,
     visibility,
     humidity,
     temp,
-    airIndex,
+    uvIndex: airIndex,
     sunrise,
     sunset,
 }) => {
+
+    const now = new Date();
+    const dayOfMonth = now.getDate(); // 1–31
+    const hours = now.getHours();       // 0–23
+    const minutes = now.getMinutes();    
+    const monthName = now.toLocaleString('en-US', { month: 'short' });
+    const suffix = hours > 12 ? "AM" : "PM"
+
+
     return (
         <VerticalContainer
             width="100%"
@@ -19,7 +29,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             alignment="center"
         >
             <Header height="10%" width="95%" />
-            <div style={{ height: "1px", width: "100%", backgroundColor: "black" }} />
+            <div style={{ height: "1px", width: "100%", backgroundColor: designSystemStyles.colorTextSecondary }} />
             <VerticalContainer
                 height={"40%"}
                 width="95%"
@@ -37,7 +47,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         temp={temp}
                         city="New York"
                         weatherState="Partly Cloudy"
-                        date="Oct 17   •   9:41 AM"
+                        date={`${monthName} ${dayOfMonth}   •   ${hours}:${minutes} ${suffix}`}
                     />
                     <VerticalContainer
                         width="35%"
@@ -47,7 +57,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         margin="0"
                         padding="0"
                     >
-                        <AirQualityComp airIndex={airIndex}/>
+                        <QualityComp uvIndex={airIndex}/>
                         <SunAndMoonComp sunrise={sunrise} sunset={sunset}/>
                     </VerticalContainer>
                 </HorizontalContainer>

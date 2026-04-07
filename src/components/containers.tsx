@@ -176,9 +176,14 @@ interface CardContainerProps {
     height?: string
     padding?: string
     backgroundColor?: string
+    background?: CSSProperties["background"]
+    accentColor?: string
+    accentPosition?: "top-left" | "top-right" | "bottom-left" | "bottom-right"
+    accentFade?: string
     borderRadius?: string
     boxShadow?: string
     gap?: string
+    border?: string
 }
 
 export const CardContainer: React.FC<CardContainerProps> = ({ 
@@ -187,11 +192,29 @@ export const CardContainer: React.FC<CardContainerProps> = ({
     width = '100%',
     padding = designSystemStyles.paddingSm,
     backgroundColor = designSystemStyles.colorBackgroundWhite,
+    background,
+    accentColor,
+    accentPosition = "top-right",
+    accentFade = "60%",
     borderRadius = designSystemStyles.cornerRadiusComponent,
     boxShadow = designSystemStyles.shadowCard,
     height = 'auto',
+    border,
     gap = "",
 }) => {
+    const accentMap = {
+        "top-left": "top left",
+        "top-right": "top right",
+        "bottom-left": "bottom left",
+        "bottom-right": "bottom right"
+    } as const
+
+    const resolvedBackground =
+        background ??
+        (accentColor
+            ? `radial-gradient(circle at ${accentMap[accentPosition]}, ${accentColor} 0%, transparent ${accentFade}), ${backgroundColor}`
+            : backgroundColor)
+
     return (
         <div style={{
             display: 'flex',
@@ -202,8 +225,10 @@ export const CardContainer: React.FC<CardContainerProps> = ({
             padding: padding,
             gap: gap,
             backgroundColor: backgroundColor,
+            background: resolvedBackground,
             borderRadius: borderRadius,
             boxShadow: boxShadow,
+            border: border,
             fontFamily: designSystemStyles.fontFamily
         }}>
             {children}

@@ -120,6 +120,7 @@ export const designSystemStyles = {
 
     // Text Colors
     colorWarningText: 'var(--color-warning-text)' as const,
+    colorOrange: 'var(--color-orange)' as const,
     colorTitleText: 'var(--color-title-text)' as const,
     colorText: 'var(--color-text)' as const,
     colorTextSecondary: 'var(--color-text-secondary)' as const,

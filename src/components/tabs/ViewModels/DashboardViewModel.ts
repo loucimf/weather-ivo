@@ -12,11 +12,10 @@ export function useDashboardViewModel(): DashboardProps {
     const daily = weatherData.daily;
     const hourly = weatherData.hourly;
 
-    const currentUvIndex = hourly.uv_index?.[0] ?? 0
     const hourlyVisibility = hourly.visibility?.[0] ?? 0
 
     return {
-        airIndex: `${currentUvIndex}`,
+        uvIndex: `${Math.round(daily.uv_index_max?.[0] || 0)}`,
         sunrise: formatTime(daily.sunrise?.[0]),
         sunset: formatTime(daily.sunset?.[0]),
 
