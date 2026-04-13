@@ -1,7 +1,7 @@
 import ClickableWrapper from "@src/components/ClickableWrapper"
 import { CardContainer, HorizontalContainer, VerticalContainer } from "@src/components/containers"
 import { SystemIcon } from "@src/design-system/SystemIcon"
-import { SmallText, Text } from "@src/design-system/Texts"
+import { BoldText, SmallText, Text } from "@src/design-system/Texts"
 import { H1Title, H2Title } from "@src/design-system/Titles"
 import { designSystemStyles } from "@src/styles/designSystemStyles"
 import React, { useState, type ComponentProps } from "react"
@@ -356,7 +356,10 @@ export const TempHourComp: React.FC<TemperatureChartProps> = ({
     return (
         <CardContainer
             width="65%"
+            height="85%"
+            padding={designSystemStyles.paddingLg}
         >
+            <BoldText text="Trending Temperature"/>
             <TemperatureTrendChart
                 latitude={latitude}
                 longitude={longitude}
@@ -368,14 +371,58 @@ export const TempHourComp: React.FC<TemperatureChartProps> = ({
 }
 
 
-export const TempSenseComp: React.FC = () => {
+const DisplayValueComp: React.FC<{
+    label: string,
+    icon: ComponentProps<typeof SystemIcon>["type"],
+    value: string,
+    padding?: string,
+}> = ({
+    label = "label",
+    icon = "edit",
+    value = "67",
+    padding = designSystemStyles.paddingLg,
+}) => {
     return (
-        <CardContainer width="35%" height="100%">
-            <VerticalContainer height={"100%"} padding={designSystemStyles.paddingLg}>
-                <IconText text="Feels Like" bold={true}/>
-            
+        <CardContainer
+            width="100%"
+            height="100%"
+        >
+            <VerticalContainer
+                height={"100%"}
+                padding={padding}
+            >
+                <IconText icon={icon} text={label} bold={true}/>
+                <H1Title text={value}/>
             </VerticalContainer>
         </CardContainer>
+    )
+}
+
+interface ApparentTempI {
+    apparentTemp: string
+}
+
+export const TempSenseComp: React.FC<ApparentTempI> = ({
+    apparentTemp = "65"
+}) => {
+    return (
+        <HorizontalContainer width="100%" height="40%">
+            <DisplayValueComp label="Feels Like" value={apparentTemp} icon="temperature" padding={designSystemStyles.paddingSm}/>
+        </HorizontalContainer>
+    )
+}
+
+interface PrecipitationTempI {
+    precipitation: string
+}
+
+export const RainfallComp: React.FC<PrecipitationTempI> = ({
+    precipitation = "67"
+}) => {
+    return (
+        <HorizontalContainer width="100%" height="40%">
+            <DisplayValueComp label="Precipitation" value={precipitation} icon="rain-cloud"  padding={designSystemStyles.paddingSm}/>
+        </HorizontalContainer>
     )
 }
 
@@ -386,7 +433,7 @@ function convertToFahrenheit(temp: number) {
 }
 
 
-export interface DashboardProps extends AirQualityProps, SunAndMoonProps, OverviewCompProps, TemperatureChartProps {
+export interface DashboardProps extends AirQualityProps, SunAndMoonProps, OverviewCompProps, TemperatureChartProps, ApparentTempI, PrecipitationTempI {
     minTemp: number | null
     maxTemp: number | null
 }

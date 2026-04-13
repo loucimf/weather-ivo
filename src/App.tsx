@@ -24,6 +24,8 @@ function App() {
 		date,
 		latitude,
 		longitude,
+		apparentTemp,
+		precipitation
 	} = useDashboardViewModel()
 	
 	const options: ISidebarOption[] = [
@@ -47,6 +49,8 @@ function App() {
 				uvIndex={airIndex}
 				sunrise={sunrise}
 				sunset={sunset}
+				apparentTemp={apparentTemp}
+				precipitation={precipitation}
 			/>
 		},
 		{

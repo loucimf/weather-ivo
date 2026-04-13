@@ -44,6 +44,7 @@ import { ReactComponent as WindIcon } from "@assets/SVGs/DesignSystem/wind.svg";
 import { ReactComponent as ArrowUpIcon } from "@assets/SVGs/DesignSystem/arrow-up.svg";
 import { ReactComponent as ArrowDownIcon } from "@assets/SVGs/DesignSystem/arrow-down.svg";
 import { ReactComponent as CycleIcon } from "@assets/SVGs/DesignSystem/cycle.svg";
+import { ReactComponent as RainCloud } from "@assets/SVGs/DesignSystem/raincloud.svg";
 
 export interface SystemIconProps {
     color: string
@@ -92,6 +93,7 @@ export interface SystemIconProps {
         | 'arrow-up'
         | 'arrow-down'
         | 'cycle'
+        | 'rain-cloud'
     className?: string
     size?: "small" | "medium" | "large" | "extra-large" | "extra-extra-large"
     glow?: boolean
@@ -223,5 +225,7 @@ export const SystemIcon: React.FC<SystemIconProps> = ({
             return <ArrowUpIcon style={iconStyle} className={iconClassName}/>
         case 'cycle':
             return <CycleIcon style={iconStyle} className={iconClassName}/>
+        case 'rain-cloud':
+            return <RainCloud style={iconStyle} className={iconClassName}/>
     }
 }

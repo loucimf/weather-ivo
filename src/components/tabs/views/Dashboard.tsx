@@ -1,6 +1,6 @@
 import type React from "react"
 import { HorizontalContainer, VerticalContainer } from "../../containers"
-import { QualityComp, Header, OverviewComp, SunAndMoonComp, type DashboardProps, TempHourComp, TempSenseComp } from "../components/DashComps"
+import { QualityComp, Header, OverviewComp, SunAndMoonComp, type DashboardProps, TempHourComp, TempSenseComp, RainfallComp } from "../components/DashComps"
 import { designSystemStyles } from "@src/styles/designSystemStyles"
 export const Dashboard: React.FC<DashboardProps> = ({
     wind,
@@ -12,7 +12,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
     sunrise,
     sunset,
     longitude,
-    latitude
+    latitude,
+    precipitation,
+    apparentTemp,
 }) => {
 
     const now = new Date();
@@ -33,12 +35,13 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <Header height="10%" width="95%" />
             <div style={{ height: "1px", width: "100%", backgroundColor: designSystemStyles.colorTextSecondary }} />
             <VerticalContainer
-                height={"40%"}
+                height={"90%"}
                 width="95%"
+                gap="0"
             >
                 <HorizontalContainer
                     width="100%"
-                    height={"100%"}
+                    height={"50%"}
                     justifyContent="flex-start"
                 >
                     <OverviewComp
@@ -63,9 +66,19 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         <SunAndMoonComp sunrise={sunrise} sunset={sunset}/>
                     </VerticalContainer>
                 </HorizontalContainer>
-                <HorizontalContainer>
+                <HorizontalContainer
+                    height={"50%"}
+                >
                     <TempHourComp longitude={longitude} latitude={latitude}/>
-                    <TempSenseComp/>
+                    <VerticalContainer
+                        height={"100%"}
+                        width="35%"
+                        justifyContent="center"
+                        alignment="space-between"
+                    >
+                        <TempSenseComp apparentTemp={apparentTemp}/>
+                        <RainfallComp precipitation={precipitation}/>
+                    </VerticalContainer>
                 </HorizontalContainer>
             </VerticalContainer>
         </VerticalContainer>

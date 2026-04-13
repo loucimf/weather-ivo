@@ -33,5 +33,7 @@ export function useDashboardViewModel(): DashboardProps {
 
         latitude: weatherData.latitude,
         longitude: weatherData.longitude,
+        apparentTemp: `${Math.round(current.apparent_temperature)}°`,
+        precipitation: `${Math.round(current.precipitation)}mm`
     }
 }
