@@ -9,14 +9,14 @@ const newYorkparams = {
 	timezone: "America/New_York",
 }; //Europe/London
 
-const autoParams = {
-	latitude: -34.5204617692487,
-	longitude: -58.475328194492775,
-	daily: ["sunrise", "sunset", "uv_index_max", "temperature_2m_max", "temperature_2m_min"],
-	hourly: ["temperature_2m", "apparent_temperature", "precipitation_probability", "wind_speed_10m", "visibility", "surface_pressure", "cloud_cover", "uv_index", "sunshine_duration"],
-	current: ["temperature_2m", "cloud_cover", "wind_speed_10m", "surface_pressure", "precipitation", "showers", "rain", "apparent_temperature", "relative_humidity_2m"],
-	timezone: "auto",
-};
+// const autoParams = {
+// 	latitude: -34.5204617692487,
+// 	longitude: -58.475328194492775,
+// 	daily: ["sunrise", "sunset", "uv_index_max", "temperature_2m_max", "temperature_2m_min"],
+// 	hourly: ["temperature_2m", "apparent_temperature", "precipitation_probability", "wind_speed_10m", "visibility", "surface_pressure", "cloud_cover", "uv_index", "sunshine_duration"],
+// 	current: ["temperature_2m", "cloud_cover", "wind_speed_10m", "surface_pressure", "precipitation", "showers", "rain", "apparent_temperature", "relative_humidity_2m"],
+// 	timezone: "auto",
+// };
 
 const url = "https://api.open-meteo.com/v1/forecast";
 const responses = await fetchWeatherApi(url, newYorkparams);
