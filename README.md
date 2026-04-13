@@ -9,6 +9,6 @@ FACUNDO ALEJANDRO LOUCIM - 5A TIC
 
 - Componentes reutilizables
 - Uso de API externa del clima
-- Deployada en vercel
+- Deployada en vercel en: https://weather-ivo.vercel.app/
 - Use mi propia libreria de React
 - El chart del grafico esta animado
